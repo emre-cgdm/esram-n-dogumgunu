@@ -12,6 +12,10 @@
             box-sizing: border-box;
         }
 
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
             font-family: 'Quicksand', sans-serif;
             min-height: 100vh;
@@ -19,7 +23,129 @@
             color: #fff;
         }
 
-        /* ARKA PLAN VİDEOSU */
+        /* ==================== */
+        /* 1. AÇILIŞ ANİMASYONU */
+        /* ==================== */
+        .envelope-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            cursor: pointer;
+            transition: opacity 1s ease;
+        }
+
+        .envelope-screen.hide {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .envelope {
+            width: 200px;
+            height: 140px;
+            position: relative;
+            animation: envelopePulse 2s infinite ease-in-out;
+        }
+
+        .envelope-body {
+            width: 200px;
+            height: 120px;
+            background: linear-gradient(135deg, #ff6b9d, #c2185b);
+            border-radius: 0 0 10px 10px;
+            position: absolute;
+            bottom: 0;
+            box-shadow: 0 5px 25px rgba(255, 107, 157, 0.5);
+        }
+
+        .envelope-flap {
+            width: 0;
+            height: 0;
+            border-left: 100px solid transparent;
+            border-right: 100px solid transparent;
+            border-top: 80px solid #e91e63;
+            position: absolute;
+            top: 0;
+            filter: drop-shadow(0 -2px 5px rgba(0,0,0,0.2));
+            transform-origin: top center;
+            animation: flapOpen 2s infinite ease-in-out;
+        }
+
+        .envelope-heart {
+            position: absolute;
+            top: 35px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 40px;
+            z-index: 2;
+        }
+
+        @keyframes envelopePulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        @keyframes flapOpen {
+            0%, 100% { transform: rotateX(0deg); }
+            50% { transform: rotateX(30deg); }
+        }
+
+        .envelope-text {
+            font-family: 'Great Vibes', cursive;
+            font-size: 2rem;
+            color: #ff6b9d;
+            margin-top: 30px;
+            text-shadow: 0 0 20px rgba(255, 107, 157, 0.5);
+        }
+
+        .tap-text {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1rem;
+            color: rgba(255,255,255,0.5);
+            margin-top: 20px;
+            animation: tapPulse 1.5s infinite;
+        }
+
+        @keyframes tapPulse {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 0.8; }
+        }
+
+        /* ==================== */
+        /* MÜZİK BUTONU        */
+        /* ==================== */
+        .music-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: rgba(255, 107, 157, 0.8);
+            border: 2px solid rgba(255,255,255,0.3);
+            color: #fff;
+            font-size: 22px;
+            cursor: pointer;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.3s;
+        }
+
+        .music-btn:hover {
+            background: rgba(255, 107, 157, 1);
+        }
+
+        /* ==================== */
+        /* ARKA PLAN VİDEOSU    */
+        /* ==================== */
         .video-background {
             position: fixed;
             top: 0;
@@ -43,7 +169,6 @@
             object-fit: cover;
         }
 
-        /* Video üstüne koyu overlay */
         .video-overlay {
             position: fixed;
             top: 0;
@@ -76,8 +201,6 @@
             0%, 100% { opacity: 0.3; transform: scale(1); }
             50% { opacity: 1; transform: scale(1.2); }
         }
-
-
 
         /* Dekorasyonlar container */
         .decorations {
@@ -115,7 +238,6 @@
             background: radial-gradient(circle at 35% 30%, #ef9a9a, #ef5350 50%, #b71c1c);
         }
 
-        /* Parlaklık */
         .round-balloon::before {
             content: '';
             position: absolute;
@@ -128,7 +250,6 @@
             transform: rotate(-30deg);
         }
 
-        /* İp */
         .round-balloon::after {
             content: '';
             position: absolute;
@@ -140,7 +261,6 @@
             transform: translateX(-50%);
         }
 
-        /* Balona asılı fotoğraf */
         .balloon-photo {
             position: absolute;
             bottom: -95px;
@@ -165,7 +285,6 @@
             50% { transform: translateY(-12px) rotate(3deg); }
         }
 
-
         /* Ana içerik */
         .container {
             position: relative;
@@ -179,18 +298,6 @@
         .hero {
             text-align: center;
             padding: 60px 20px;
-            animation: fadeInDown 1.5s ease-out;
-        }
-
-        @keyframes fadeInDown {
-            from {
-                opacity: 0;
-                transform: translateY(-30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
         }
 
         .heart-container {
@@ -260,6 +367,25 @@
             50% { transform: scale(1.08); }
         }
 
+        /* ==================== */
+        /* 5. KALP IŞILTILARI   */
+        /* ==================== */
+        .sparkle {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            background: #fff;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 6;
+        }
+
+        @keyframes sparkleAnim {
+            0% { transform: scale(0); opacity: 1; }
+            50% { transform: scale(1); opacity: 0.8; }
+            100% { transform: scale(0); opacity: 0; }
+        }
+
         .heart-text {
             position: absolute;
             top: 45%;
@@ -270,6 +396,9 @@
             z-index: 10;
         }
 
+        /* ==================== */
+        /* 3. TYPEWRITER EFEKTİ */
+        /* ==================== */
         .heart-text h1 {
             font-family: 'Great Vibes', cursive;
             font-size: 2.8rem;
@@ -286,7 +415,20 @@
             display: block;
         }
 
-        /* Mesaj kartları - ŞEFFAF VE ŞIK */
+        .typewriter-char {
+            opacity: 0;
+            display: inline-block;
+            animation: charAppear 0.4s forwards;
+        }
+
+        @keyframes charAppear {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ==================== */
+        /* 2. SCROLL REVEAL     */
+        /* ==================== */
         .message-card {
             position: relative;
             background: rgba(20, 20, 40, 0.45);
@@ -297,8 +439,15 @@
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3),
                         0 0 40px rgba(255, 107, 157, 0.15),
                         inset 0 0 80px rgba(255, 107, 157, 0.02);
-            animation: fadeIn 1s ease-out;
-            animation-fill-mode: both;
+            /* Scroll reveal - başlangıçta gizli */
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .message-card.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         .message-card::before {
@@ -355,15 +504,6 @@
             background: linear-gradient(135deg, #fab1a0 0%, #e17055 50%, #d63031 100%);
         }
 
-        .message-card:nth-child(2) { animation-delay: 0.3s; }
-        .message-card:nth-child(3) { animation-delay: 0.6s; }
-        .message-card:nth-child(4) { animation-delay: 0.9s; }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
         .message-card h2 {
             font-family: 'Great Vibes', cursive;
             font-size: 2.8rem;
@@ -413,7 +553,6 @@
             border-radius: 3px;
         }
 
-        /* Mandal */
         .pinned-photo::before {
             content: '📌';
             position: absolute;
@@ -425,44 +564,13 @@
             z-index: 5;
         }
 
-        /* Fotoğraf pozisyonları */
-        .photo-pos-1 {
-            top: -100px;
-            left: -180px;
-            transform: rotate(-12deg);
-        }
+        .photo-pos-1 { top: -100px; left: -180px; transform: rotate(-12deg); }
+        .photo-pos-2 { top: -100px; right: -180px; transform: rotate(10deg); }
+        .photo-pos-3 { bottom: -100px; left: -180px; transform: rotate(8deg); }
+        .photo-pos-4 { bottom: -100px; right: -180px; transform: rotate(-8deg); }
+        .photo-pos-5 { top: 50%; left: -200px; transform: translateY(-50%) rotate(-5deg); }
+        .photo-pos-6 { top: 50%; right: -200px; transform: translateY(-50%) rotate(6deg); }
 
-        .photo-pos-2 {
-            top: -100px;
-            right: -180px;
-            transform: rotate(10deg);
-        }
-
-        .photo-pos-3 {
-            bottom: -100px;
-            left: -180px;
-            transform: rotate(8deg);
-        }
-
-        .photo-pos-4 {
-            bottom: -100px;
-            right: -180px;
-            transform: rotate(-8deg);
-        }
-
-        .photo-pos-5 {
-            top: 50%;
-            left: -200px;
-            transform: translateY(-50%) rotate(-5deg);
-        }
-
-        .photo-pos-6 {
-            top: 50%;
-            right: -200px;
-            transform: translateY(-50%) rotate(6deg);
-        }
-
-        /* İp efekti */
         .string-line {
             position: absolute;
             top: -25px;
@@ -474,13 +582,20 @@
             z-index: 4;
         }
 
-        /* Son mesaj */
+        /* Son mesaj - scroll reveal */
         .final-message {
             text-align: center;
             padding: 60px 20px;
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
         }
 
-        /* CSS KALBİ - Alttaki */
+        .final-message.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
         .final-heart {
             position: relative;
             width: 100px;
@@ -526,51 +641,60 @@
             text-shadow: 0 0 30px rgba(255, 107, 157, 0.6);
         }
 
-
         /* Responsive - Telefon */
         @media (max-width: 700px) {
-            .big-heart {
-                width: 220px;
-                height: 200px;
-            }
+            .envelope { width: 160px; height: 112px; }
+            .envelope-body { width: 160px; height: 96px; }
+            .envelope-flap { border-left-width: 80px; border-right-width: 80px; border-top-width: 64px; }
+            .envelope-heart { font-size: 30px; top: 25px; }
+            .envelope-text { font-size: 1.5rem; }
+
+            .big-heart { width: 220px; height: 200px; }
             .big-heart::before,
-            .big-heart::after {
-                width: 110px;
-                height: 175px;
-            }
+            .big-heart::after { width: 110px; height: 175px; }
             .big-heart::before { left: 110px; }
             .heart-shine { top: 20px; left: 45px; width: 30px; height: 30px; }
             .heart-text h1 { font-size: 1.5rem; }
             .heart-text .name { font-size: 2.3rem; }
-            .message-card {
-                padding: 25px 15px;
-                margin: 100px 15px;
-            }
+            .message-card { padding: 25px 15px; margin: 100px 15px; }
             .message-card p { font-size: 1rem; }
             .message-card h2 { font-size: 1.8rem; }
             .final-message p { font-size: 1.8rem; }
 
-            .pinned-photo {
-                width: 90px;
-                height: 90px;
-                padding: 4px;
-            }
-            .pinned-photo::before {
-                font-size: 18px;
-                top: -12px;
-            }
+            .pinned-photo { width: 90px; height: 90px; padding: 4px; }
+            .pinned-photo::before { font-size: 18px; top: -12px; }
 
-            /* Telefonda fotoğraflar üstte ve altta yan yana */
             .photo-pos-1 { left: 10px; top: -70px; }
             .photo-pos-2 { right: 10px; top: -70px; }
             .photo-pos-3 { left: 10px; bottom: -70px; }
             .photo-pos-4 { right: 10px; bottom: -70px; }
             .photo-pos-5 { left: 10px; top: -70px; }
             .photo-pos-6 { right: 10px; top: -70px; }
+
+            .music-btn { width: 42px; height: 42px; font-size: 18px; bottom: 15px; right: 15px; }
         }
     </style>
 </head>
 <body>
+
+    <!-- 1. AÇILIŞ ZARFI -->
+    <div class="envelope-screen" id="envelopeScreen">
+        <div class="envelope">
+            <div class="envelope-flap"></div>
+            <div class="envelope-body">
+                <div class="envelope-heart">💌</div>
+            </div>
+        </div>
+        <div class="envelope-text">Sana Özel Bir Sürpriz...</div>
+        <div class="tap-text">dokunarak aç</div>
+    </div>
+
+    <!-- 4. MÜZİK BUTONU -->
+    <button class="music-btn" id="musicBtn" title="Müzik Aç/Kapat">🔊</button>
+    <audio id="bgMusic" loop preload="auto">
+        <source src="music.mp3" type="audio/mpeg">
+    </audio>
+
     <!-- ARKA PLAN VİDEOSU -->
     <div class="video-background">
         <video autoplay muted loop playsinline preload="auto">
@@ -582,30 +706,25 @@
     <!-- Yıldızlar -->
     <div class="stars" id="stars"></div>
 
-
-    <!-- Dekorasyonlar (pasta, yaş) -->
+    <!-- Dekorasyonlar -->
     <div class="decorations" id="decorations"></div>
-
-
-
 
     <div class="container">
         <!-- BÜYÜK KALP İÇİNDE BAŞLIK -->
         <section class="hero">
-            <div class="heart-container">
+            <div class="heart-container" id="heartContainer">
                 <div class="big-heart">
                     <div class="heart-shine"></div>
                 </div>
                 <div class="heart-text">
-                    <h1>İyi ki Doğdun</h1>
-                    <span class="name">Esram</span>
+                    <h1 id="typewriterLine1"></h1>
+                    <span class="name" id="typewriterLine2"></span>
                 </div>
             </div>
         </section>
 
-        <!-- Mesaj 1 - 2 fotoğraf iliştirilmiş -->
+        <!-- Mesaj 1 -->
         <div class="message-card">
-            <!-- Mandallı fotoğraflar -->
             <div class="pinned-photo photo-pos-1">
                 <div class="string-line"></div>
                 <img src="IMG-20250616-WA0001.jpg" alt="Anı 1">
@@ -614,7 +733,6 @@
                 <div class="string-line"></div>
                 <img src="IMG-20250616-WA0137.jpg" alt="Anı 2">
             </div>
-
             <h2>Sana Bir Şey Söylemek İstiyorum</h2>
             <p>
                 Seninle geçirdiğim her an, hayatımın en güzel anları oldu.
@@ -625,9 +743,8 @@
             <div class="rose-petals" id="petals1"></div>
         </div>
 
-        <!-- Mesaj 2 - 2 fotoğraf iliştirilmiş -->
+        <!-- Mesaj 2 -->
         <div class="message-card">
-            <!-- Mandallı fotoğraflar -->
             <div class="pinned-photo photo-pos-5">
                 <div class="string-line"></div>
                 <img src="IMG-20250616-WA0254.jpg" alt="Anı 3">
@@ -636,7 +753,6 @@
                 <div class="string-line"></div>
                 <img src="IMG-20250616-WA0335.jpg" alt="Anı 4">
             </div>
-
             <h2>Sen Benim İçin...</h2>
             <p>
                 Sen benim en büyük şansım, en güzel hediyemsin.
@@ -646,9 +762,8 @@
             <div class="rose-petals" id="petals2"></div>
         </div>
 
-        <!-- Mesaj 3 - 2 fotoğraf iliştirilmiş -->
+        <!-- Mesaj 3 -->
         <div class="message-card">
-            <!-- Mandallı fotoğraflar -->
             <div class="pinned-photo photo-pos-3">
                 <div class="string-line"></div>
                 <img src="IMG-20250616-WA0365.jpg" alt="Anı 5">
@@ -657,7 +772,6 @@
                 <div class="string-line"></div>
                 <img src="IMG-20250616-WA0398.jpg" alt="Anı 6">
             </div>
-
             <h2>Sonsuz Sevgi</h2>
             <p>
                 Seni dün sevdim, bugün seviyorum ve yarın da seveceğim.
@@ -676,7 +790,116 @@
     </div>
 
     <script>
-        // Yıldızları oluştur - azaltıldı
+        // ==========================================
+        // 1. AÇILIŞ ANİMASYONU - Zarfa tıkla aç
+        // ==========================================
+        document.getElementById('envelopeScreen').addEventListener('click', function() {
+            this.classList.add('hide');
+            setTimeout(() => {
+                this.style.display = 'none';
+                startTypewriter();
+                startSparkles();
+            }, 1000);
+
+            // Müziği 33. saniyeden başlat
+            const music = document.getElementById('bgMusic');
+            music.currentTime = 33;
+            music.volume = 0.4;
+            music.play().catch(() => {});
+        });
+
+        // ==========================================
+        // 3. TYPEWRITER EFEKTİ
+        // ==========================================
+        function startTypewriter() {
+            const line1 = 'İyi ki Doğdun';
+            const line2 = 'Esram';
+            const el1 = document.getElementById('typewriterLine1');
+            const el2 = document.getElementById('typewriterLine2');
+
+            let delay = 0;
+            line1.split('').forEach((char, i) => {
+                const span = document.createElement('span');
+                span.className = 'typewriter-char';
+                span.textContent = char === ' ' ? '\u00A0' : char;
+                span.style.animationDelay = (delay + i * 0.1) + 's';
+                el1.appendChild(span);
+            });
+
+            delay = line1.length * 0.1 + 0.3;
+            line2.split('').forEach((char, i) => {
+                const span = document.createElement('span');
+                span.className = 'typewriter-char';
+                span.textContent = char === ' ' ? '\u00A0' : char;
+                span.style.animationDelay = (delay + i * 0.15) + 's';
+                el2.appendChild(span);
+            });
+        }
+
+        // ==========================================
+        // 5. KALP IŞILTILARI
+        // ==========================================
+        function startSparkles() {
+            const container = document.getElementById('heartContainer');
+
+            setInterval(() => {
+                const sparkle = document.createElement('div');
+                sparkle.className = 'sparkle';
+                sparkle.style.left = (Math.random() * 100) + '%';
+                sparkle.style.top = (Math.random() * 100) + '%';
+                sparkle.style.width = (3 + Math.random() * 5) + 'px';
+                sparkle.style.height = sparkle.style.width;
+                sparkle.style.animation = `sparkleAnim ${0.8 + Math.random() * 0.8}s ease-out forwards`;
+                sparkle.style.boxShadow = '0 0 6px #fff, 0 0 10px rgba(255,107,157,0.6)';
+                container.appendChild(sparkle);
+
+                setTimeout(() => sparkle.remove(), 1600);
+            }, 500);
+        }
+
+        // ==========================================
+        // 2. SCROLL REVEAL - Kartlar belirsin
+        // ==========================================
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.15 });
+
+        document.querySelectorAll('.message-card, .final-message').forEach(el => {
+            observer.observe(el);
+        });
+
+        // ==========================================
+        // 4. MÜZİK KONTROL
+        // ==========================================
+        const musicBtn = document.getElementById('musicBtn');
+        const bgMusic = document.getElementById('bgMusic');
+        let isPlaying = false;
+
+        musicBtn.addEventListener('click', function() {
+            if (isPlaying) {
+                bgMusic.pause();
+                musicBtn.textContent = '🔇';
+                isPlaying = false;
+            } else {
+                bgMusic.volume = 0.4;
+                bgMusic.play().catch(() => {});
+                musicBtn.textContent = '🔊';
+                isPlaying = true;
+            }
+        });
+
+        bgMusic.addEventListener('play', () => {
+            isPlaying = true;
+            musicBtn.textContent = '🔊';
+        });
+
+        // ==========================================
+        // YILDIZLAR
+        // ==========================================
         function createStars() {
             const starsContainer = document.getElementById('stars');
             for (let i = 0; i < 60; i++) {
@@ -691,7 +914,9 @@
             }
         }
 
-        // ŞİŞİK BALONLAR + ASILI FOTOĞRAFLAR
+        // ==========================================
+        // BALONLAR + FOTOĞRAFLAR
+        // ==========================================
         function createDecorations() {
             const container = document.getElementById('decorations');
             const balloons = [
@@ -722,16 +947,14 @@
             });
         }
 
-
-
-        // GÜL YAPRAKLARI OLUŞTUR
+        // ==========================================
+        // GÜL YAPRAKLARI
+        // ==========================================
         function createRosePetals() {
             const petalContainers = ['petals1', 'petals2', 'petals3'];
-
             petalContainers.forEach(containerId => {
                 const container = document.getElementById(containerId);
                 if (!container) return;
-
                 for (let i = 0; i < 10; i++) {
                     const petal = document.createElement('div');
                     petal.className = 'petal';
