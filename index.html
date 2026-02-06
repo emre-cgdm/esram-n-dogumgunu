@@ -641,6 +641,168 @@
             text-shadow: 0 0 30px rgba(255, 107, 157, 0.6);
         }
 
+
+        /* PASTA + MUMLAR */
+        .cake-area {
+            margin: 80px auto 10px;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .cake { display: inline-block; position: relative; }
+
+        .cake-body {
+            position: relative;
+            width: 160px;
+            height: 70px;
+            background: linear-gradient(180deg, #ff8fab, #e05780);
+            border-radius: 10px 10px 20px 20px;
+            margin: 0 auto;
+            box-shadow: 0 5px 20px rgba(224, 87, 128, 0.4);
+        }
+
+        .cake-body::before {
+            content: '';
+            position: absolute;
+            top: -15px;
+            left: -5px;
+            right: -5px;
+            height: 25px;
+            background: linear-gradient(180deg, #fff5f5, #ffc8d6);
+            border-radius: 15px 15px 5px 5px;
+        }
+
+        .cake-body::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 15px;
+            background: linear-gradient(180deg, transparent, rgba(255,255,255,0.2));
+            border-radius: 0 0 20px 20px;
+        }
+
+        .cake-plate {
+            width: 190px;
+            height: 12px;
+            background: linear-gradient(180deg, #ddd, #bbb);
+            border-radius: 50%;
+            margin: 0 auto;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+        }
+
+        .candles {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            position: absolute;
+            top: -55px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .candle {
+            position: relative;
+            width: 8px;
+            height: 35px;
+            border-radius: 3px 3px 2px 2px;
+        }
+
+        .candle:nth-child(1) { background: linear-gradient(180deg, #ff6b6b, #ee5a5a); }
+        .candle:nth-child(2) { background: linear-gradient(180deg, #ffd93d, #f0c929); }
+        .candle:nth-child(3) { background: linear-gradient(180deg, #6bcb77, #4caf50); }
+        .candle:nth-child(4) { background: linear-gradient(180deg, #4d96ff, #3b82f6); }
+        .candle:nth-child(5) { background: linear-gradient(180deg, #ff6bcb, #e84393); }
+
+        .candle::before {
+            content: '';
+            position: absolute;
+            top: -7px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 1.5px;
+            height: 8px;
+            background: #555;
+        }
+
+        .flame {
+            position: absolute;
+            top: -22px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 8px;
+            height: 16px;
+            background: radial-gradient(ellipse at center bottom, #fff 0%, #ffeb3b 30%, #ff9800 60%, transparent 100%);
+            border-radius: 50% 50% 30% 30%;
+            animation: flicker 0.3s infinite alternate;
+        }
+
+        .flame.out { animation: blowOut 0.5s forwards; }
+
+        @keyframes flicker {
+            0% { transform: translateX(-50%) scaleY(1) rotate(-2deg); }
+            100% { transform: translateX(-50%) scaleY(1.1) rotate(2deg); }
+        }
+
+        @keyframes blowOut {
+            0% { transform: translateX(-50%) scaleY(1); opacity: 1; }
+            30% { transform: translateX(-50%) scaleY(1.5) scaleX(1.5); opacity: 0.8; }
+            100% { transform: translateX(-50%) scaleY(0) scaleX(3); opacity: 0; }
+        }
+
+        .smoke-container {
+            position: absolute;
+            top: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 10px;
+            height: 10px;
+            background: rgba(200,200,200,0.8);
+            border-radius: 50%;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .smoke-container.show { animation: smokeRise 2s forwards; }
+
+        @keyframes smokeRise {
+            0% { opacity: 0.8; transform: translateX(-50%) translateY(0) scale(1); }
+            50% { opacity: 0.4; transform: translateX(-50%) translateY(-25px) scale(2.5); }
+            100% { opacity: 0; transform: translateX(-50%) translateY(-55px) scale(4); }
+        }
+
+        .cake-text {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1rem;
+            font-style: italic;
+            color: rgba(255,255,255,0.5);
+            margin-top: 15px;
+            animation: tapPulse 1.5s infinite;
+        }
+
+        .cake-text.blown {
+            animation: none;
+            color: #ff6b9d;
+            opacity: 1;
+            font-size: 1.2rem;
+        }
+
+        /* DOKUNMA KALBİ */
+        .touch-heart {
+            position: fixed;
+            font-size: 20px;
+            pointer-events: none;
+            z-index: 9998;
+            animation: touchHeartAnim 1s forwards;
+        }
+
+        @keyframes touchHeartAnim {
+            0% { transform: scale(0) translateY(0); opacity: 1; }
+            50% { transform: scale(1.2) translateY(-20px); opacity: 0.8; }
+            100% { transform: scale(0.5) translateY(-60px); opacity: 0; }
+        }
+
         /* Responsive - Telefon */
         @media (max-width: 700px) {
             .envelope { width: 160px; height: 112px; }
@@ -672,6 +834,11 @@
             .photo-pos-6 { right: 10px; top: -70px; }
 
             .music-btn { width: 42px; height: 42px; font-size: 18px; bottom: 15px; right: 15px; }
+
+            .round-balloon { width: 35px; height: 40px; }
+            .round-balloon::before { top: 9px; left: 10px; width: 8px; height: 5px; }
+            .round-balloon::after { bottom: -40px; height: 40px; }
+            .balloon-photo { width: 38px; height: 38px; bottom: -72px; }
         }
     </style>
 </head>
@@ -736,7 +903,7 @@
             <h2>Sana Bir Şey Söylemek İstiyorum</h2>
             <p>
                 Seninle geçirdiğim her an, hayatımın en güzel anları oldu.
-                Bu fotoğraflardaki ve daha güzel yerlere inşallah tekrar gideceğiz ve buralar dolacak.
+                Bu fotoğraftaki yerlere ve daha güzel yerlere inşallah tekrar gideceğiz ve buralar anılarımızla dolacak.
                 Gülüşün güneşim, varlığın huzurum...
                 Seni tanıdığım günden beri hayatım ne kadar güzelleşti anlatamam.
             </p>
@@ -785,7 +952,24 @@
         <section class="final-message">
             <div class="final-heart"></div>
             <p>Seni Sonsuza Kadar Seveceğim</p>
-            <p style="font-size: 2.5rem; margin-top: 30px;">Nice mutlu yaşlara boncuğum! 🎂</p>
+            <p style="font-size: 2.5rem; margin-top: 30px;">Nice mutlu yaşlara boncuğum!</p>
+
+            <!-- PASTA + MUMLAR -->
+            <div class="cake-area" id="cakeArea">
+                <div class="cake">
+                    <div class="cake-body">
+                        <div class="candles">
+                            <div class="candle"><div class="flame"></div><div class="smoke-container"></div></div>
+                            <div class="candle"><div class="flame"></div><div class="smoke-container"></div></div>
+                            <div class="candle"><div class="flame"></div><div class="smoke-container"></div></div>
+                            <div class="candle"><div class="flame"></div><div class="smoke-container"></div></div>
+                            <div class="candle"><div class="flame"></div><div class="smoke-container"></div></div>
+                        </div>
+                    </div>
+                    <div class="cake-plate"></div>
+                </div>
+                <div class="cake-text" id="cakeText">dokunarak mumları söndür</div>
+            </div>
         </section>
     </div>
 
@@ -966,6 +1150,47 @@
                 }
             });
         }
+
+
+        // ==========================================
+        // MUM SÖNDÜRME
+        // ==========================================
+        let cakeBlown = false;
+        document.getElementById('cakeArea').addEventListener('click', function() {
+            if (cakeBlown) return;
+            cakeBlown = true;
+
+            document.querySelectorAll('.flame').forEach((flame, i) => {
+                setTimeout(() => flame.classList.add('out'), i * 150);
+            });
+            document.querySelectorAll('.smoke-container').forEach((container, i) => {
+                setTimeout(() => container.classList.add('show'), i * 150 + 300);
+            });
+
+            const text = document.getElementById('cakeText');
+            setTimeout(() => {
+                text.textContent = 'Dileklerin gerçek olsun! 💫';
+                text.classList.add('blown');
+            }, 800);
+        });
+
+        // ==========================================
+        // DOKUNMA İLE KALPler
+        // ==========================================
+        const hearts = ['💕', '💖', '💗', '❤️', '💘'];
+        document.addEventListener('click', function(e) {
+            // Zarf ekranında ve butonlarda çalışmasın
+            if (e.target.closest('.envelope-screen') || e.target.closest('.music-btn') || e.target.closest('.cake-area')) return;
+
+            const heart = document.createElement('div');
+            heart.className = 'touch-heart';
+            heart.textContent = hearts[Math.floor(Math.random() * hearts.length)];
+            heart.style.left = e.clientX - 10 + 'px';
+            heart.style.top = e.clientY - 10 + 'px';
+            document.body.appendChild(heart);
+
+            setTimeout(() => heart.remove(), 1000);
+        });
 
         // Sayfa yüklendiğinde
         window.onload = function() {
