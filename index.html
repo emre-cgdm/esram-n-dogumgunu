@@ -37,9 +37,9 @@
             width: auto;
             height: auto;
             position: absolute;
-            top: 50%;
+            top: 60%;
             left: 50%;
-            transform: translate(-50%, -50%);
+            transform: translate(-50%, -60%);
             object-fit: cover;
         }
 
@@ -90,76 +90,79 @@
             z-index: 2;
         }
 
-        /* CSS BALON */
-        .css-balloon {
+        /* ŞİŞİK BALONLAR */
+        .round-balloon {
             position: absolute;
-            width: 35px;
-            height: 42px;
-            background: linear-gradient(135deg, #ff4081 0%, #f50057 60%, #c51162 100%);
-            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
-            animation: floatBounce 3s infinite ease-in-out;
-            box-shadow:
-                inset -5px -5px 15px rgba(0,0,0,0.2),
-                inset 5px 5px 15px rgba(255,255,255,0.3),
-                0 5px 15px rgba(255, 64, 129, 0.4);
+            width: 45px;
+            height: 52px;
+            border-radius: 50%;
+            animation: balloonSway 4s infinite ease-in-out;
         }
 
-        .css-balloon::before {
-            content: '';
-            position: absolute;
-            bottom: -8px;
-            left: 50%;
-            transform: translateX(-50%);
-            border-left: 6px solid transparent;
-            border-right: 6px solid transparent;
-            border-top: 10px solid #c51162;
+        .round-balloon.pink {
+            background: radial-gradient(circle at 35% 30%, #ff8ab5, #ff4081 50%, #c2185b);
+        }
+        .round-balloon.blue {
+            background: radial-gradient(circle at 35% 30%, #90caf9, #42a5f5 50%, #1565c0);
+        }
+        .round-balloon.gold {
+            background: radial-gradient(circle at 35% 30%, #fff176, #ffd740 50%, #ff8f00);
+        }
+        .round-balloon.purple {
+            background: radial-gradient(circle at 35% 30%, #ce93d8, #ab47bc 50%, #6a1b9a);
+        }
+        .round-balloon.red {
+            background: radial-gradient(circle at 35% 30%, #ef9a9a, #ef5350 50%, #b71c1c);
         }
 
-        .css-balloon::after {
+        /* Parlaklık */
+        .round-balloon::before {
             content: '';
             position: absolute;
-            bottom: -50px;
+            top: 12px;
+            left: 14px;
+            width: 10px;
+            height: 7px;
+            background: rgba(255,255,255,0.5);
+            border-radius: 50%;
+            transform: rotate(-30deg);
+        }
+
+        /* İp */
+        .round-balloon::after {
+            content: '';
+            position: absolute;
+            bottom: -55px;
             left: 50%;
             width: 1px;
-            height: 45px;
-            background: linear-gradient(180deg, #888 0%, #ccc 100%);
+            height: 55px;
+            background: rgba(255,255,255,0.4);
+            transform: translateX(-50%);
         }
 
-        .css-balloon.blue {
-            background: linear-gradient(135deg, #2196f3 0%, #1976d2 60%, #0d47a1 100%);
-            box-shadow:
-                inset -5px -5px 15px rgba(0,0,0,0.2),
-                inset 5px 5px 15px rgba(255,255,255,0.3),
-                0 5px 15px rgba(33, 150, 243, 0.4);
+        /* Balona asılı fotoğraf */
+        .balloon-photo {
+            position: absolute;
+            bottom: -95px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 50px;
+            border-radius: 5px;
+            border: 2px solid #fff;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.4);
         }
-        .css-balloon.blue::before { border-top-color: #0d47a1; }
 
-        .css-balloon.gold {
-            background: linear-gradient(135deg, #ffd700 0%, #ffb300 60%, #ff8f00 100%);
-            box-shadow:
-                inset -5px -5px 15px rgba(0,0,0,0.2),
-                inset 5px 5px 15px rgba(255,255,255,0.3),
-                0 5px 15px rgba(255, 215, 0, 0.4);
+        .balloon-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
-        .css-balloon.gold::before { border-top-color: #ff8f00; }
 
-        .css-balloon.green {
-            background: linear-gradient(135deg, #4caf50 0%, #388e3c 60%, #1b5e20 100%);
-            box-shadow:
-                inset -5px -5px 15px rgba(0,0,0,0.2),
-                inset 5px 5px 15px rgba(255,255,255,0.3),
-                0 5px 15px rgba(76, 175, 80, 0.4);
-        }
-        .css-balloon.green::before { border-top-color: #1b5e20; }
-
-        @keyframes floatBounce {
+        @keyframes balloonSway {
             0%, 100% { transform: translateY(0) rotate(-3deg); }
-            50% { transform: translateY(-15px) rotate(3deg); }
-        }
-
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
+            50% { transform: translateY(-12px) rotate(3deg); }
         }
 
 
@@ -688,24 +691,33 @@
             }
         }
 
-        // BALON DEKORASYONLARI
+        // ŞİŞİK BALONLAR + ASILI FOTOĞRAFLAR
         function createDecorations() {
             const container = document.getElementById('decorations');
-            const decorations = [
-                { type: 'balloon', x: '2%', y: '25%', color: '' },
-                { type: 'balloon', x: '95%', y: '18%', color: 'blue' },
-                { type: 'balloon', x: '4%', y: '55%', color: 'gold' },
-                { type: 'balloon', x: '93%', y: '45%', color: 'green' },
-                { type: 'balloon', x: '3%', y: '80%', color: 'blue' },
-                { type: 'balloon', x: '94%', y: '72%', color: '' },
+            const balloons = [
+                { x: '2%', y: '18%', color: 'pink', photo: 'IMG-20250616-WA0001.jpg' },
+                { x: '94%', y: '12%', color: 'blue', photo: 'IMG-20250616-WA0137.jpg' },
+                { x: '4%', y: '45%', color: 'gold', photo: 'IMG-20250616-WA0254.jpg' },
+                { x: '92%', y: '40%', color: 'purple', photo: 'IMG-20250616-WA0335.jpg' },
+                { x: '3%', y: '72%', color: 'red', photo: 'IMG-20250616-WA0365.jpg' },
+                { x: '93%', y: '68%', color: 'pink', photo: 'IMG-20250616-WA0398.jpg' },
             ];
 
-            decorations.forEach((deco, index) => {
+            balloons.forEach((b, index) => {
                 const element = document.createElement('div');
-                element.className = 'css-balloon ' + (deco.color || '');
-                element.style.left = deco.x;
-                element.style.top = deco.y;
-                element.style.animationDelay = (index * 0.4) + 's';
+                element.className = 'round-balloon ' + b.color;
+                element.style.left = b.x;
+                element.style.top = b.y;
+                element.style.animationDelay = (index * 0.7) + 's';
+
+                const photoDiv = document.createElement('div');
+                photoDiv.className = 'balloon-photo';
+                const img = document.createElement('img');
+                img.src = b.photo;
+                img.alt = 'Anı';
+                photoDiv.appendChild(img);
+                element.appendChild(photoDiv);
+
                 container.appendChild(element);
             });
         }
