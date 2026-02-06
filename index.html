@@ -28,6 +28,7 @@
             height: 100%;
             z-index: -2;
             overflow: hidden;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
         }
 
         .video-background video {
@@ -681,8 +682,8 @@
 <body>
     <!-- ARKA PLAN VİDEOSU -->
     <div class="video-background">
-        <video autoplay muted loop playsinline>
-            <source src="20250604_181334.mp4" type="video/mp4">
+        <video autoplay muted loop playsinline preload="auto">
+            <source src="bg-video.mp4" type="video/mp4">
         </video>
     </div>
     <div class="video-overlay"></div>
